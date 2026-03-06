@@ -1,0 +1,9 @@
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\bin\Debug\lab1wp.exe.config
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\bin\Debug\lab1wp.exe
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\bin\Debug\lab1wp.pdb
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\obj\Debug\lab1wp.csproj.AssemblyReference.cache
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\obj\Debug\lab1wp.Properties.Resources.resources
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\obj\Debug\lab1wp.csproj.GenerateResource.cache
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\obj\Debug\lab1wp.csproj.CoreCompileInputs.cache
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\obj\Debug\lab1wp.exe
+C:\Users\Екатерина\Desktop\ООАП2\Object-oriented-analysis-and-design-2\lab01\lab1wp\lab1wp\obj\Debug\lab1wp.pdb
