@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace GameFactoryDemo
 {
-  
+    
     public interface Enemy
     {
         string GetName();
@@ -26,7 +26,7 @@ namespace GameFactoryDemo
         Image GetImage();
     }
 
-    // === Фэнтези ===
+   
     public class FantasyEnemy : Enemy
     {
         public string GetName() => "Древний дракон";
@@ -48,7 +48,7 @@ namespace GameFactoryDemo
         public Image GetImage() => lab1.Properties.Resources.fantasy_potion;
     }
 
-    // === Киберпанк ===
+    
     public class CyberPankEnemy : Enemy
     {
         public string GetName() => "Кибер-солдат";
@@ -70,7 +70,6 @@ namespace GameFactoryDemo
         public Image GetImage() => lab1.Properties.Resources.cyber_potion;
     }
 
-    // === Фабрики ===
     public interface GameFactory
     {
         Enemy createEnemy();
@@ -103,14 +102,13 @@ namespace GameFactoryDemo
     {
         private GameFactory currentFactory;
 
-
         public Form1()
         {
             InitializeComponent();
             worldSelector.SelectedIndex = 0;
             currentFactory = new FantasyGameFactory();
             UpdateWorldUI();
-            Log("🎮 Добро пожаловать!\nВыберите мир и нажмите «Генерировать».\n");
+            Log(" Добро пожаловать!\nВыберите мир и нажмите «Генерировать».\n");
         }
 
         private void WorldSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,7 +122,10 @@ namespace GameFactoryDemo
                 currentFactory = new CyberPankGameFactory();
 
             UpdateWorldUI();
-            outputLog.Clear();
+
+           
+            outputLog.Clear();          
+            ClearImages();              
         }
 
         private void GenerateBtn_Click(object sender, EventArgs e)
@@ -138,6 +139,7 @@ namespace GameFactoryDemo
             Enemy enemy = currentFactory.createEnemy();
             Weapon weapon = currentFactory.createWeapon();
             Potion potion = currentFactory.createPotion();
+
             if (picEnemy != null) picEnemy.Image = new Bitmap(enemy.GetImage());
             if (picWeapon != null) picWeapon.Image = new Bitmap(weapon.GetImage());
             if (picPotion != null) picPotion.Image = new Bitmap(potion.GetImage());
@@ -160,7 +162,8 @@ namespace GameFactoryDemo
 
         private void ClearBtn_Click(object sender, EventArgs e)
         {
-            outputLog.Clear();
+            outputLog.Clear();      // 🔥 очищаем текст
+            ClearImages();          // 🔥 очищаем картинки
         }
 
         private void UpdateWorldUI()
@@ -175,6 +178,35 @@ namespace GameFactoryDemo
                 outputLog.Invoke(new Action(() => outputLog.AppendText(message + Environment.NewLine)));
             else
                 outputLog.AppendText(message + Environment.NewLine);
+        }
+
+      
+        private void ClearImages()
+        {
+            if (picEnemy?.Image != null)
+            {
+                picEnemy.Image.Dispose();
+                picEnemy.Image = null;
+            }
+
+            if (picWeapon?.Image != null)
+            {
+                picWeapon.Image.Dispose();
+                picWeapon.Image = null;
+            }
+
+            if (picPotion?.Image != null)
+            {
+                picPotion.Image.Dispose();
+                picPotion.Image = null;
+            }
+        }
+
+  
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            ClearImages();
+            base.OnFormClosed(e);
         }
     }
 }
