@@ -1,66 +1,76 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace GameFactoryDemo
 {
-
+  
     public interface Enemy
     {
         string GetName();
         string GetDescription();
+        Image GetImage();
     }
 
     public interface Weapon
     {
         string GetName();
         string GetDescription();
+        Image GetImage();
     }
 
     public interface Potion
     {
         string GetName();
         string GetDescription();
+        Image GetImage();
     }
 
-
+    // === Фэнтези ===
     public class FantasyEnemy : Enemy
     {
         public string GetName() => "Древний дракон";
         public string GetDescription() => "Огромный ящер с чешуёй цвета заката. Дышит огнём.";
+        public Image GetImage() => lab1.Properties.Resources.fantasy_enemy;
     }
 
     public class FantasyWeapon : Weapon
     {
         public string GetName() => "Стальной меч";
         public string GetDescription() => "Кованый клинок с рунами силы.";
+        public Image GetImage() => lab1.Properties.Resources.fantasy_weapon;
     }
 
     public class FantasyPotion : Potion
     {
         public string GetName() => "Зелье маны";
         public string GetDescription() => "Синяя жидкость с магическим свечением.";
+        public Image GetImage() => lab1.Properties.Resources.fantasy_potion;
     }
 
-
+    // === Киберпанк ===
     public class CyberPankEnemy : Enemy
     {
         public string GetName() => "Кибер-солдат";
         public string GetDescription() => "Человек с боевыми имплантами.";
+        public Image GetImage() => lab1.Properties.Resources.cyber_enemy;
     }
 
     public class CyberPankWeapon : Weapon
     {
         public string GetName() => "Плазменная винтовка";
         public string GetDescription() => "Стреляет сгустками плазмы.";
+        public Image GetImage() => lab1.Properties.Resources.cyber_weapon;
     }
 
     public class CyberPankPotion : Potion
     {
         public string GetName() => "Энергетик Вольт";
         public string GetDescription() => "Радиоактивный напиток для бодрости.";
+        public Image GetImage() => lab1.Properties.Resources.cyber_potion;
     }
 
-
+    // === Фабрики ===
     public interface GameFactory
     {
         Enemy createEnemy();
@@ -88,10 +98,11 @@ namespace GameFactoryDemo
         public string GetWorldDescription() => "Мир высоких технологий";
     }
 
-
+    // === Форма ===
     public partial class Form1 : Form
     {
         private GameFactory currentFactory;
+
 
         public Form1()
         {
@@ -127,6 +138,9 @@ namespace GameFactoryDemo
             Enemy enemy = currentFactory.createEnemy();
             Weapon weapon = currentFactory.createWeapon();
             Potion potion = currentFactory.createPotion();
+            if (picEnemy != null) picEnemy.Image = new Bitmap(enemy.GetImage());
+            if (picWeapon != null) picWeapon.Image = new Bitmap(weapon.GetImage());
+            if (picPotion != null) picPotion.Image = new Bitmap(potion.GetImage());
 
             Log($"\n ВРАГ");
             Log($"  {enemy.GetName()}");
