@@ -1,27 +1,29 @@
 ﻿using System;
+using System.Drawing;      
 using System.Windows.Forms;
 
 namespace GameWithoutPattern
 {
-
     public class Enemy
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Image Image { get; set; } 
     }
 
     public class Weapon
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Image Image { get; set; } 
     }
 
     public class Potion
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Image Image { get; set; }  
     }
-
 
     public partial class Form1 : Form
     {
@@ -42,6 +44,9 @@ namespace GameWithoutPattern
             currentWorld = worldSelector.SelectedItem.ToString();
             UpdateWorldUI();
             outputLog.Clear();
+
+           
+            ClearImages();
         }
 
         private void GenerateBtn_Click(object sender, EventArgs e)
@@ -54,25 +59,27 @@ namespace GameWithoutPattern
             Weapon weapon;
             Potion potion;
 
-
             if (currentWorld == "Фэнтези")
             {
                 enemy = new Enemy
                 {
                     Name = "Древний дракон",
-                    Description = "Огромный ящер с чешуёй цвета заката. Дышит огнём."
+                    Description = "Огромный ящер с чешуёй цвета заката. Дышит огнём.",
+                    Image = lab1wp.Properties.Resources.fantasy_enemy  
                 };
 
                 weapon = new Weapon
                 {
                     Name = "Стальной меч",
-                    Description = "Кованый клинок с рунами силы."
+                    Description = "Кованый клинок с рунами силы.",
+                    Image = lab1wp.Properties.Resources.fantasy_weapon  
                 };
 
                 potion = new Potion
                 {
                     Name = "Зелье маны",
-                    Description = "Синяя жидкость с магическим свечением."
+                    Description = "Синяя жидкость с магическим свечением.",
+                    Image = lab1wp.Properties.Resources.fantasy_potion  
                 };
             }
             else if (currentWorld == "Киберпанк")
@@ -80,19 +87,22 @@ namespace GameWithoutPattern
                 enemy = new Enemy
                 {
                     Name = "Кибер-солдат",
-                    Description = "Человек с боевыми имплантами."
+                    Description = "Человек с боевыми имплантами.",
+                    Image = lab1wp.Properties.Resources.cyber_enemy  
                 };
 
                 weapon = new Weapon
                 {
                     Name = "Плазменная винтовка",
-                    Description = "Стреляет сгустками плазмы."
+                    Description = "Стреляет сгустками плазмы.",
+                    Image = lab1wp.Properties.Resources.cyber_weapon  
                 };
 
                 potion = new Potion
                 {
                     Name = "Энергетик Вольт",
-                    Description = "Радиоактивный напиток для бодрости."
+                    Description = "Радиоактивный напиток для бодрости.",
+                    Image = lab1wp.Properties.Resources.cyber_potion 
                 };
             }
             else
@@ -101,6 +111,13 @@ namespace GameWithoutPattern
                 return;
             }
 
+            // 🔥 Отображаем картинки в PictureBox
+            if (picEnemy != null && enemy.Image != null)
+                picEnemy.Image = new Bitmap(enemy.Image);
+            if (picWeapon != null && weapon.Image != null)
+                picWeapon.Image = new Bitmap(weapon.Image);
+            if (picPotion != null && potion.Image != null)
+                picPotion.Image = new Bitmap(potion.Image);
 
             Log($"\n ВРАГ");
             Log($"  {enemy.Name}");
@@ -143,6 +160,19 @@ namespace GameWithoutPattern
                 outputLog.Invoke(new Action(() => outputLog.AppendText(message + Environment.NewLine)));
             else
                 outputLog.AppendText(message + Environment.NewLine);
+        }
+        private void ClearImages()
+        {
+            if (picEnemy?.Image != null) { picEnemy.Image.Dispose(); picEnemy.Image = null; }
+            if (picWeapon?.Image != null) { picWeapon.Image.Dispose(); picWeapon.Image = null; }
+            if (picPotion?.Image != null) { picPotion.Image.Dispose(); picPotion.Image = null; }
+        }
+
+        
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            ClearImages();
+            base.OnFormClosed(e);
         }
     }
 }
