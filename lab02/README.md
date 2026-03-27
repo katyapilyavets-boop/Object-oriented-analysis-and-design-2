@@ -12,6 +12,8 @@
 Это и есть наш мост. 
 
 3. Диаграмма классов
-<img width="1196" height="638" alt="image" src="https://github.com/user-attachments/assets/a3663c9f-796e-4f4d-88ff-42a806abaae2" />
+
+<img width="1265" height="608" alt="image" src="https://github.com/user-attachments/assets/53b7788b-9898-4638-8d1b-302f7ff2a9c3" />
+
 
 6. Вывод: Благодаря этому паттерну мы можем создать две независимые иерархии классов.
